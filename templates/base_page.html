@@ -31,14 +31,26 @@
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
 				<span class="mdl-layout-title">Rose-Hulman Flea Market</span>
+				
+				
+				{% if user_info is defined %}
+					<nav class="mdl-navigation">
+						<a class="mdl-navigation__link" id="liked_list"> Liked </a>
+					</nav>
+					<nav class="mdl-navigation">
+						<a class="mdl-navigation__link" id="selling_list"> Selling </a>
+					</nav>
+				{% endif %}
+				
 				<!-- Add spacer, to align navigation to the right -->
 				<div class="mdl-layout-spacer"></div>
-				<!-- Navigation. We hide it in small screens. -->
 				{% if user_info is not defined %}
-				<nav class="mdl-navigation mdl-layout--large-screen-only">
+				<nav class="mdl-navigation">
 					<a class="mdl-navigation__link" id="login"> Login </a>
-				</nav> {% else %}
-				<nav class="mdl-navigation mdl-layout--large-screen-only">
+				</nav>
+				{% else %}
+				<!-- User has logged in -->
+				<nav class="mdl-navigation">
 					<a class="mdl-navigation__link" href="/logout"> Logout </a>
 				</nav>
 				{% endif %}
