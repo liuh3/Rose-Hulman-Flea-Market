@@ -1,0 +1,24 @@
+{% extends "templates/base_page.html" %} {% block content %}
+<div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--4dp">
+	{% if user_info is defined %}
+	<div class="mdl-card__title">
+		<h2 class="mdl-card__title-text">Profile</h2>
+	</div>
+	<div class="mdl-cell mdl-cell--5-col">
+		<img src="./static/images/default-avatar.png" border="0"
+			alt="Profile Picture">
+	</div>
+	<div class="mdl-cell mdl-cell--7-col">
+		<div class="mdl-cell mdl-cell--12-col mdl-typography--headline">{{
+			user_info.name }}</div>
+		<div class="mdl-cell mdl-cell--12-col mdl-typography--headline">@{{
+			user_info.username }}</div>
+		<div class="mdl-cell mdl-cell--12-col mdl-typography--headline">
+			{{ user_info.email }}</div>
+	</div>
+
+	{% endif %}
+</div>
+{% endblock %}
+
+
