@@ -2,54 +2,63 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <title>Rose-Hulman Flea Market</title>
- 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/static/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>Rose-Hulman Flea Market</title>
 
-  <!-- Material Design Lite -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
- 
-  <!-- Material Design Lite and jQuery JS -->
-  <script src="/static/js/jquery-2.2.3.min.js"></script>
-  <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-  
-  <!-- Custom JS -->
-  <script src="/static/js/rosefire.js"></script>
-  <script src="/static/js/main.js"></script>
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/static/css/style.css">
+
+<!-- Material Design Lite -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+
+<!-- Material Design Lite and jQuery JS -->
+<script src="/static/js/jquery-2.2.3.min.js"></script>
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/static/js/rosefire.js"></script>
+<script src="/static/js/main.js"></script>
 
 </head>
-
 <body>
-<div>
-  {% if user_info is defined %}
-	  <p>
-	    You are logged in as {{ user_info.name }}.
-	  </p>
-	  <ul>
-		  <li><b>username:</b> {{ user_info.username }}</li>
-		  <li><b>email:</b> {{ user_info.email }}</li>
-		  <li><b>role:</b> {{ user_info.role }}</li>
-	  </ul>
-	  <div>
-	    <a href="/logout" class="btn btn-danger">
-	      Logout
-	    </a>
-	  </div>
-  {% else %}
-	  <p>
-	    You are not logged in.
-	  </p>
-	  <div>
-	  	<button id="login" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-  			Login
-		</button>
-	  </div>
-  {% endif %}
-</div>
+
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+				<span class="mdl-layout-title">Rose-Hulman Flea Market</span>
+				<!-- Add spacer, to align navigation to the right -->
+				<div class="mdl-layout-spacer"></div>
+				<!-- Navigation. We hide it in small screens. -->
+				{% if user_info is not defined %}
+				<nav class="mdl-navigation mdl-layout--large-screen-only">
+					<a class="mdl-navigation__link" id="login"> Login </a>
+				</nav> {% else %}
+				<nav class="mdl-navigation mdl-layout--large-screen-only">
+					<a class="mdl-navigation__link" href="/logout"> Logout </a>
+				</nav>
+				{% endif %}
+			</div>
+		</header>
+		<main class="mdl-layout__content">
+		<div class="page-content">
+			{% if user_info is defined %}
+			<p>You are logged in as {{ user_info.name }}.</p>
+			<ul>
+				<li><b>username:</b> {{ user_info.username }}</li>
+				<li><b>email:</b> {{ user_info.email }}</li>
+				<li><b>role:</b> {{ user_info.role }}</li>
+			</ul>
+			{% endif %}
+		</div>
+		</main>
+	</div>
+
 </body>
 
 </html>
