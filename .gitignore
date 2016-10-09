@@ -1,2 +1,7 @@
 # Google App Engine generated folder
 appengine-generated/
+
+.project
+.pydevproject
+appengine_config.pyc
+main.pyc
