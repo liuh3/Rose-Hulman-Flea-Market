@@ -68,6 +68,22 @@ class LogoutHandler(BaseHandler):
         del self.session["user_info"]
         self.redirect(uri="/")
 
+class ListingHandler(BaseHandler):
+    def get(self):
+        template = jinja_env.get_template("templates/listing.html")
+
+        if "user_info" in self.session:
+          user_info = json.loads(self.session["user_info"])
+          self.response.out.write(template.render({"user_info": user_info}))
+        else:
+          self.response.out.write(template.render())
+          
+class InsertItemHandler(BaseHandler):
+    def get(self):
+        template = jinja_env.get_template("templates/insert_item.html")
+#       TODO: add authentication   
+        self.response.out.write(template.render())
+      
 config = {}
 config['webapp2_extras.sessions'] = {
     # This key is used to encrypt your sessions
@@ -78,4 +94,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/logout', LogoutHandler),
+    ('/listing', ListingHandler),
+    ('/insert-item', InsertItemHandler)
 ], config=config, debug=True)
