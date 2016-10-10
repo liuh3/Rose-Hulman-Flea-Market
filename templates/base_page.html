@@ -30,18 +30,16 @@
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
-				<span class="mdl-layout-title">Rose-Hulman Flea Market</span>
-				
-				
-				{% if user_info is defined %}
-					<nav class="mdl-navigation">
-						<a class="mdl-navigation__link" id="liked_list"> Liked </a>
-					</nav>
-					<nav class="mdl-navigation">
-						<a class="mdl-navigation__link" id="selling_list"> Selling </a>
-					</nav>
+				<span class="mdl-layout-title">Rose-Hulman Flea Market</span> {% if
+				user_info is defined %}
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link" id="liked_list"> Liked </a>
+				</nav>
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link" id="selling_list"> Selling </a>
+				</nav>
 				{% endif %}
-				
+
 				<!-- Add spacer, to align navigation to the right -->
 				<div class="mdl-layout-spacer"></div>
 				{% if user_info is not defined %}
@@ -51,15 +49,27 @@
 				{% else %}
 				<!-- User has logged in -->
 				<nav class="mdl-navigation">
-					<a class="mdl-navigation__link" href="/logout"> Logout </a>
+					<a id="nav_user" href="/profile">{{ user_info.name }}</a>						
 				</nav>
+				
+				<!-- Right aligned menu below button -->
+				<button id="demo-menu-lower-right"
+					class="mdl-button mdl-js-button mdl-button--icon">
+					<i class="material-icons">more_vert</i>
+				</button>
+
+				<ul
+					class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+					for="demo-menu-lower-right">
+					<a class="mdl-menu__item" href="/logout"> Logout </a>
+				</ul>
 				{% endif %}
 			</div>
 		</header>
-		<main class="mdl-layout__content">
-			{% block content %}{% endblock %}
-		</main>
 	</div>
+	<main>
+      {% block content %}{% endblock %}
+    </main>
 </body>
 
 </html>

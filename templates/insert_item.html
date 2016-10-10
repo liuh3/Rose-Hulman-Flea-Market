@@ -1,36 +1,41 @@
 {% extends "templates/base_page.html" %} {% block content %}
+<div class="insert-item-buttons">
+	<button
+		class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+		Save Changes</button>
+	<button
+		class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+		Cancel</button>
+</div>
 <form>
-	<div class="mdl-layout__header-row">
 	<h4>Photos</h4>
-		<button
-			class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-			Save Changes</button>
-		<button
-			class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-			Cancel</button>
-	</div>
-
-	
 	<div class="mdl-textfield mdl-js-textfield">
 		<input class="mdl-textfield__input" type="text" id="image_url">
 		<label class="mdl-textfield__label" for="image_url">Image Url</label>
 	</div>
 
 	<h4>Details</h4>
-	<div class="mdl-textfield mdl-js-textfield">
-		<input class="mdl-textfield__input" type="text" id="item_name">
-		<label class="mdl-textfield__label" for="item_name">Name</label>
+	<div>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text" id="item_name">
+			<label class="mdl-textfield__label" for="item_name">Name</label>
+		</div>
 	</div>
-	<div class="mdl-textfield mdl-js-textfield">
-		<input class="mdl-textfield__input" type="text" id="item_description">
-		<label class="mdl-textfield__label" for="item_description">Image
-			Url</label>
+	<div>
+		<div class="mdl-textfield mdl-js-textfield">
+			<textarea class="mdl-textfield__input" type="text" rows="4"
+				id="item_description"></textarea>
+				 <label class="mdl-textfield__label"
+				for="item_description">Description</label>
+		</div>
 	</div>
-	<div class="mdl-textfield mdl-js-textfield">
-		<input class="mdl-textfield__input" type="text"
-			pattern="-?[0-9]*(\.[0-9]+)?" id="item_price"> <label
-			class="mdl-textfield__label" for="item_price">Price</label> <span
-			class="mdl-textfield__error">Input is not a number!</span>
+	<div>
+		<div class="mdl-textfield mdl-js-textfield">
+			<input class="mdl-textfield__input" type="text"
+				pattern="-?[0-9]*(\.[0-9]+)?" id="item_price"> <label
+				class="mdl-textfield__label" for="item_price">Price</label> <span
+				class="mdl-textfield__error">Input is not a number!</span>
+		</div>
 	</div>
 </form>
 {% endblock %}

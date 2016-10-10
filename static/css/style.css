@@ -1,1 +1,17 @@
 /* Add CSS rules here. */
+main {
+	padding: 70px 20px;
+}
+
+img {
+	background-color:none;
+}
+
+#nav_user {
+	text-decoration:none;
+	color: white;
+}
+
+.insert-item-buttons {
+	float: right;
+}
