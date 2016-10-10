@@ -1,14 +1,14 @@
 {% extends "templates/base_page.html" %} {% block content %}
 <div class="insert-item-buttons">
 	<button
-		class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+		class="insert-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
 		Save Changes</button>
 	<button
 		class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
 		Cancel</button>
 </div>
 <form>
-	<h4>Photos</h4>
+	<h4>Photo</h4>
 	<div class="mdl-textfield mdl-js-textfield">
 		<input class="mdl-textfield__input" type="text" id="image_url">
 		<label class="mdl-textfield__label" for="image_url">Image Url</label>
@@ -25,8 +25,7 @@
 		<div class="mdl-textfield mdl-js-textfield">
 			<textarea class="mdl-textfield__input" type="text" rows="4"
 				id="item_description"></textarea>
-				 <label class="mdl-textfield__label"
-				for="item_description">Description</label>
+			<label class="mdl-textfield__label" for="item_description">Description</label>
 		</div>
 	</div>
 	<div>
