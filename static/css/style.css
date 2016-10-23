@@ -15,3 +15,11 @@ img {
 .insert-item-buttons {
 	float: right;
 }
+
+.feed-list{
+	margin:15px;
+}
+
+.feed-card {
+	margin:15px;
+}

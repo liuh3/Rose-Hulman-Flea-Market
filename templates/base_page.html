@@ -49,9 +49,9 @@
 				{% else %}
 				<!-- User has logged in -->
 				<nav class="mdl-navigation">
-					<a id="nav_user" href="/profile">{{ user_info.name }}</a>						
+					<a id="nav_user" href="/profile">{{ user_info.name }}</a>
 				</nav>
-				
+
 				<!-- Right aligned menu below button -->
 				<button id="demo-menu-lower-right"
 					class="mdl-button mdl-js-button mdl-button--icon">
@@ -67,9 +67,8 @@
 			</div>
 		</header>
 	</div>
-	<main>
-      {% block content %}{% endblock %}
-    </main>
+
+	<main> {% block content %}{% endblock %} </main>
 </body>
 
 </html>

@@ -10,7 +10,7 @@ class User(ndb.Model):
     posted_item = ndb.KeyProperty(repeated=True, kind='Item')
 
 class Item(ndb.Model):
-    name = ndb.StringProperty(default="")
+    name = ndb.StringProperty(default="Item Name")
     description = ndb.TextProperty()
     price = ndb.FloatProperty()
     image_url = ndb.StringProperty()
