@@ -25,15 +25,10 @@ rh.fm.enableButtons = function() {
 		var item_price = $('#item_price').val();
 	});
 
-	$('.feed-card').click(function() {
-		var item_entity_key = $('#item_entity_key').text();
-		$('#item-detail-page input[name=item_entity_key]').val(item_entity_key);
-		window.location.replace("/item?entity=" + item_entity_key);
-	});
-
 	$('.view-item-button').click(function() {
-		var entityKey = $(".feed-card").find(".entity-key").html();
+		var entityKey = $(this).find(".entity-key").html();
 		$(".item-card input[name=item-entity-key]").val(entityKey).prop("disabled", false);
+		
 	});
 
 	$("#attach-img-btn").click(function() {
