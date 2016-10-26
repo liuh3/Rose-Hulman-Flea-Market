@@ -1,0 +1,58 @@
+{% extends "templates/base_page.html" %} {% block content %}
+<div class="mdl-cell--12-col-desktop">
+	<main class="mdl-layout__content mdl-cell--12-col-desktop"
+		id="item-detail-page"> {% if item is defined %}
+	<div class="mdl-layout__tab-panel is-active" id="overview">
+		<section
+			class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp item-info-section">
+			<header
+				class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+				<img src="/img/{{ item.media_blob_key }}" alt="image"
+					class="item_image" />
+			</header>
+			<div
+				class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+				<div class="mdl-card__supporting-text">
+					<h4>{{ item.name }}</h4>
+					<p>{{ item.description }}</p>
+				</div>
+				<div class="mdl-card__actions">
+					<a href="#" class="mdl-button">Contact seller</a>
+				</div>
+			</div>
+		</section>
+
+		<section
+			class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp comment-section">
+			<div class="mdl-card mdl-cell mdl-cell--12-col">
+				<div class="mdl-card__supporting-text mdl-grid mdl-grid">
+					<h4 class="mdl-cell mdl-cell--12-col">Comments</h4>
+					<div
+						class="section__text mdl-cell mdl-cell--12-col">
+						<div
+							class="section__text mdl-cell mdl-cell--2-col" style="display:inline">
+							<a href="#">Coco</a>
+						</div>
+						<div
+							class="section__text mdl-cell mdl-cell--9-col" style="display:inline">Nice
+							Item</div>
+					</div>
+
+
+	<div
+						class="section__text mdl-cell mdl-cell--12-col">
+						<div
+							class="section__text mdl-cell mdl-cell--2-col" style="display:inline">
+							<a href="#">Addison</a>
+						</div>
+						<div
+							class="section__text mdl-cell mdl-cell--9-col" style="display:inline">
+						LOVE</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	{% endif %} </main>
+</div>
+{% endblock %}
