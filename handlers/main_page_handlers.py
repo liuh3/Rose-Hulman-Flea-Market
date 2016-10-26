@@ -35,11 +35,17 @@ class MainHandler(BaseHandler):
         template = main.jinja_env.get_template("templates/feed_list.html")
         
         if "user_info" in self.session:
-          user_info = json.loads(self.session["user_info"])
-          self.response.out.write(template.render({"user_info": user_info,"items":items}))
+            user_info = json.loads(self.session["user_info"])
+            self.response.out.write(template.render({"user_info": user_info,"items":items}))
         else:
           self.response.out.write(template.render({"items":items}))
 
+class DetailItemHandler(webapp2.RequestHandler):        
+    def post(self):
+        logging.info("here")
+        if  self.request.get("item_entity_key"):
+            logging.info("Key found")
+    
 class LoginHandler(BaseHandler):
     def get(self):
         if "user_info" not in self.session:

@@ -11,6 +11,8 @@ def get_parent_key(user):
 def get_items():
   """ Gets all of the items and makes a key map for them. """
   items = Item.query().fetch()
-  logging.info(items)
-
   return items
+  
+def get_item_with_key(key_url_string):
+    item_key = ndb.Key(urlsafe=key_url_string)
+    item = item_key.get()

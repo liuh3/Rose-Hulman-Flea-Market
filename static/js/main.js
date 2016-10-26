@@ -24,6 +24,13 @@ rh.fm.enableButtons = function() {
 		var item_price = $('#item_price').val();
 		console.log(item_url);
 	});
+	
+	$('.feed-card').click(function() {
+		var item_entity_key = $('#item_entity_key').text();
+		$('#item-detail-page input[name=item_entity_key]').val(item_entity_key);
+		console.log(item_entity_key);
+		window.location.replace("/item?entity=" + item_entity_key);
+	})
 };
 
 $(document).ready(function() {
