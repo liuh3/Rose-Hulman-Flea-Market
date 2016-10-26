@@ -11,6 +11,12 @@ indexes:
 # your application using appcfg.py.
 
 - kind: Item
+  properties:
+  - name: seller_key
+  - name: last_touch_date_time
+    direction: desc
+
+- kind: Item
   ancestor: yes
   properties:
   - name: last_touch_date_time

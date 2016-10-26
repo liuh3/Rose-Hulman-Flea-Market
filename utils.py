@@ -18,10 +18,8 @@ def get_items():
 def get_posted_items(user):
   """ Gets all of the items and makes a key map for them. """
   user_key = get_parent_key(user)
-  logging.info(user_key)
+  items = Item.query(Item.seller_key==user_key).order(-Item.last_touch_date_time);
   
-#   items = Item.query(ndb.AND(ancestor=PARENT_KEY, Item.seller_key==user_key)).order(-Item.last_touch_date_time);
-
-#   return items
+  return items
 
 
