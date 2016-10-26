@@ -23,3 +23,8 @@ img {
 .feed-card {
 	margin:15px;
 }
+
+.not-active {
+   text-decoration: none;
+   color: white;
+}

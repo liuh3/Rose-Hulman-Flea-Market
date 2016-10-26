@@ -8,6 +8,7 @@ import main
 from models import Item
 import utils
 
+PARENT_KEY = ndb.Key("Entity", "item_root")
 
 class InsertItemHandler(base_handlers.BaseHandler):
     def get(self):
@@ -28,9 +29,10 @@ class InsertItemHandler(base_handlers.BaseHandler):
           item = item_key.get()
         else:
           #Add
-          item = Item(parent=utils.get_parent_key(user));
-       
-#         item.seller_key = user
+          item = Item(parent=PARENT_KEY);
+          user['posted_items'].append(item);
+#           item = Item(parent=utils.get_parent_key(user));
+          logging.info(item)
         item.name=self.request.get('item_name')
         item.image_url = self.request.get('image_url')
         item.price = float(self.request.get('item_price'))
