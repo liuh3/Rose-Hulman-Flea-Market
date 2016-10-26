@@ -35,14 +35,13 @@ class InsertItemHandler(base_handlers.BaseHandler, blobstore_handlers.BlobstoreU
         else:
           #Add
           item = Item(parent=PARENT_KEY);
-          user['posted_items'].append(item.key.urlsafe());
         
         if self.get_uploads() and len(self.get_uploads()) == 1:
           logging.info("Received an image blob with this text message event.")
           media_blob = self.get_uploads()[0]
           item.media_blob_key = media_blob.key()
       
-        
+        item.seller_key = utils.get_parent_key(user);
         item.name=self.request.get('item_name')
         item.image_url = self.request.get('image_url')
         item.price = float(self.request.get('item_price'))

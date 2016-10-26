@@ -5,7 +5,7 @@ import jinja2
 import webapp2
 
 from handlers import insert_handlers, main_page_handlers, \
-  profile_handlers, blob_handlers
+  profile_handlers, blob_handlers, listing_handlers
 
 
 def __init_jinja_env():
@@ -33,5 +33,6 @@ app = webapp2.WSGIApplication([
     ('/logout', main_page_handlers.LogoutHandler),
 #     ('/listing', main_page_handlers.MainHandler),
     ('/insert-item', insert_handlers.InsertItemHandler),
+    ('/posted-items', listing_handlers.PostedHandler),
     ('/profile', profile_handlers.ProfileHandler)
 ], config=config, debug=True)

@@ -1,7 +1,6 @@
 import json
 import logging
 
-import webapp2
 from webapp2_extras import sessions
 
 from handlers import base_handlers
@@ -33,9 +32,7 @@ class LoginHandler(base_handlers.BaseHandler):
             user_info = {"name": auth_data.name,
                          "username": auth_data.username,
                          "email": auth_data.email,
-                         "role": auth_data.group,
-                         "liked_items": [],
-                         "posted_items": []}
+                         "role": auth_data.group}
             self.session["user_info"] = json.dumps(user_info)
         self.redirect(uri="/")
 
