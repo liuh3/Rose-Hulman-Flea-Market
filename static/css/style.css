@@ -22,6 +22,9 @@ img {
 
 .feed-card {
 	margin:15px;
+	width: 30%;
+	height: 400px;
+	text-align: center;
 }
 
 .comment-section {
@@ -32,6 +35,24 @@ img {
 	width:100%;
 	margin: 0 auto;
 }
+
+.card-item-image {
+	height: 100%;
+	width: 100%;
+}
+.item-name {
+	font-size:20px;
+	
+}
+.item-detail-image {
+	height: 100%;
+	width: 100%;
+}
+
+.view-item-button {
+	width: 100%;
+}
+
 .not-active {
    text-decoration: none;
    color: white;

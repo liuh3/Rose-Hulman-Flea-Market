@@ -1,10 +1,19 @@
-
 <form role="form" action="/view-item" method="POST"
-	class="demo-card-square mdl-card mdl-shadow--2dp feed-card mdl-cell mdl-cell--3-col">
+	class="mdl-card mdl-shadow--2dp feed-card mdl-cell mdl-cell--3-col">
+	<div class="mdl-card__supporting-text item-card-image">
+		<img src="/img/{{ item.media_blob_key }}" alt="image"
+			class="card-item-image" />
+	</div>
+	<div class="mdl-card__supporting-text">
+		<span class="item-name">{{ item.name }}</span><br> ${{ item.price
+		}}
+	</div>
+	<hr>
 	<div class="mdl-card__titlemdl-card--expand item-card">
-		<h2 class="mdl-card__title-text">{{ item.name }}</h2>
-		<div class="hidden entity-key">{{item.key.urlsafe()}}</div>
-		<input name="item-entity-key" class="hidden" />
-		<input class="view-item-button" type="submit" value="View Details">
+		<input name="item-entity-key" class="hidden"/> 
+		<button type="submit" class="view-item-button mdl-button mdl-js-button">
+			View Details
+			<div class="hidden entity-key">{{ item.key.urlsafe() }}</div>
+		</button>
 	</div>
 </form>
