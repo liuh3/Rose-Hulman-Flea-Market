@@ -1,0 +1,10 @@
+{% extends "templates/base_page.html" %} 
+{% block content %}
+<div class="posted-list mdl-grid">
+	{% for item in items %}	
+		
+	    {% include "templates/feed_card.html" %}
+	{% endfor %}
+</div>
+
+{% endblock %}

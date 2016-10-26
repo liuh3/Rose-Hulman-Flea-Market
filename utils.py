@@ -14,6 +14,11 @@ def get_items():
     items = Item.query(ancestor=PARENT_KEY).order(-Item.last_touch_date_time);
     return items
 
+def get_posted_items(user):
+  user_key = get_parent_key(user)
+  items = Item.query(Item.seller_key==user_key).order(-Item.last_touch_date_time);
+  return items
+
 def get_item_with_key(key_url_string):
-    item_key = ndb.Key(urlsafe=key_url_string)
-    return item_key.get()
+  item_key = ndb.Key(urlsafe=key_url_string)
+  return item_key.get()
