@@ -5,7 +5,7 @@ import jinja2
 import webapp2
 
 from handlers import insert_handlers, main_page_handlers, \
-  profile_handlers
+  profile_handlers, blob_handlers
 
 
 def __init_jinja_env():
@@ -28,6 +28,7 @@ config['webapp2_extras.sessions'] = {
 
 app = webapp2.WSGIApplication([
     ('/', main_page_handlers.MainHandler),
+    ('/img/([^/]+)?', blob_handlers.BlobServer),
     ('/login', main_page_handlers.LoginHandler),
     ('/logout', main_page_handlers.LogoutHandler),
 #     ('/listing', main_page_handlers.MainHandler),
