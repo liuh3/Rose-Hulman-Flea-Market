@@ -30,7 +30,13 @@ rh.fm.enableButtons = function() {
 		$('#item-detail-page input[name=item_entity_key]').val(item_entity_key);
 		console.log(item_entity_key);
 		window.location.replace("/item?entity=" + item_entity_key);
-	})
+	});
+	
+	$('.view-item-button').click(function() {
+		var entityKey = $(".feed-card").find(".entity-key").html();
+		$(".item-card input[name=item-entity-key]").val(entityKey).prop("disabled", false);
+		console.log(entityKey);
+	});
 };
 
 $(document).ready(function() {

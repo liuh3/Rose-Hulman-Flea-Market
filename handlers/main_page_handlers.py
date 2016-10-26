@@ -39,12 +39,6 @@ class MainHandler(BaseHandler):
             self.response.out.write(template.render({"user_info": user_info,"items":items}))
         else:
           self.response.out.write(template.render({"items":items}))
-
-class DetailItemHandler(webapp2.RequestHandler):        
-    def post(self):
-        logging.info("here")
-        if  self.request.get("item_entity_key"):
-            logging.info("Key found")
     
 class LoginHandler(BaseHandler):
     def get(self):

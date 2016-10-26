@@ -23,3 +23,12 @@ img {
 .feed-card {
 	margin:15px;
 }
+
+.comment-section {
+	margin-top:20px;
+}
+
+#overview {
+	width:100%;
+	margin: 0 auto;
+}
