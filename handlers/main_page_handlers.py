@@ -18,10 +18,10 @@ class MainHandler(base_handlers.BaseHandler):
         # self.response.write("Hello world!")
         items = utils.get_items()
         template = main.jinja_env.get_template("templates/feed_list.html")
-        
+
         if "user_info" in self.session:
-          user_info = json.loads(self.session["user_info"])
-          self.response.out.write(template.render({"user_info": user_info,"items":items}))
+            user_info = json.loads(self.session["user_info"])
+            self.response.out.write(template.render({"user_info": user_info,"items":items}))
         else:
           self.response.out.write(template.render({"items":items}))
 
