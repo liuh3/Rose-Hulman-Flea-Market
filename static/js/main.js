@@ -18,23 +18,21 @@ rh.fm.loginRose = function() {
 };
 
 rh.fm.enableButtons = function() {
-	$('.insert-item').click(function() {
-		var item_url = $('#image_url').val();
-		var item_name = $('#item_name').val();
-		var item_description = $('#item_description').val();
-		var item_price = $('#item_price').val();
+	var dialog = document.querySelector('dialog');
+	$(".delete-item").click(function() {
+		dialog.showModal();
+		entityKey= $(this).find(".entity-key").html();
+		console.log(entityKey);
+		$("#delete-item-modal input[name=item-entity-key]").val(entityKey);
 	});
-
-	$('.view-item-button').click(function() {
-		var entityKey = $(this).find(".entity-key").html();
-		$(".item-card input[name=item-entity-key]").val(entityKey).prop("disabled", false);
-		
-	});
-
+	$(".close-dialog").click(function(){
+		dialog.close();
+	})
+	
 	$("#attach-img-btn").click(function() {
 		rh.fm.triggerFileInput();
 	});
-
+	
 	$("#remove-img-btn").click(function() {
 		$(this).hide();
 		$("#current-img").hide();

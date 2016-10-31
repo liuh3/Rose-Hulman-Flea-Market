@@ -44,6 +44,9 @@ img {
 	font-size:20px;
 	
 }
+.item-card-image {
+	height: 100%;
+}
 .item-detail-image {
 	height: 100%;
 	width: 100%;

@@ -8,47 +8,81 @@
 			<header
 				class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
 				<img src="/img/{{ item.media_blob_key }}" alt="image"
-					class="item-detail-image" />
+					class="item-detail-image"
+					onerror="this.src='../static/images/no-image.jpg'" />
 			</header>
 			<div
-				class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+				class="item-detail mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+				{% if is_seller %}
+				<div class="mdl-card__menu">
+					<form action="/insert-item" method="GET">
+						<input name="item-entity-key" class="hidden"
+							value={{item.key.urlsafe()}} />
+						<button type="submit" id="edit-current"
+							class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+							<i class="material-icons">edit</i>
+						</button>
+					</form>
+
+
+					<button data-toggle="modal" data-target="#delete-item-modal"
+						type="button"
+						class="delete-item mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+						<div class="hidden entity-key">{{ item.key.urlsafe() }}</div>
+						<i class="material-icons">delete</i>
+					</button>
+				</div>
+				{% endif %}
+
+				<dialog class="mdl-dialog" id="delete-item-modal">
+				<h4 class="mdl-dialog__title">Delete Item</h4>
+				<div class="mdl-dialog__content">
+					<p>Are you sure you want to delete this item?</p>
+				</div>
+				<form action="/delete-item" method="POST" role="form">
+					<input name="item-entity-key" class="hidden">
+					<div class="mdl-dialog__actions">
+						<button type="submit" class="mdl-button">Yes</button>
+						<button type="button" class="mdl-button close-dialog">No</button>
+					</div>
+				</form>
+				</dialog>
+
 				<div class="mdl-card__supporting-text">
 					<h3>{{ item.name }}</h3>
-					<p>About the product </p>
+					<p>About the product</p>
 					<p>{{ item.description }}</p>
+					<p>${{ item.price }}</p>
 				</div>
 				<div class="mdl-card__actions">
-					<a href="#" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Contact seller</a>
+					<a href="#"
+						class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Contact
+						seller</a>
 				</div>
 			</div>
 		</section>
-
 		<section
 			class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp comment-section">
 			<div class="mdl-card mdl-cell mdl-cell--12-col">
 				<div class="mdl-card__supporting-text mdl-grid mdl-grid">
 					<h4 class="mdl-cell mdl-cell--12-col">Comments</h4>
-					<div
-						class="section__text mdl-cell mdl-cell--12-col">
-						<div
-							class="section__text mdl-cell mdl-cell--2-col" style="display:inline">
+					<div class="section__text mdl-cell mdl-cell--12-col">
+						<div class="section__text mdl-cell mdl-cell--2-col"
+							style="display: inline">
 							<a href="#">Coco</a>
 						</div>
-						<div
-							class="section__text mdl-cell mdl-cell--9-col" style="display:inline">Nice
-							Item</div>
+						<div class="section__text mdl-cell mdl-cell--9-col"
+							style="display: inline">Nice Item</div>
 					</div>
 
 
-	<div
-						class="section__text mdl-cell mdl-cell--12-col">
-						<div
-							class="section__text mdl-cell mdl-cell--2-col" style="display:inline">
+					<div class="section__text mdl-cell mdl-cell--12-col">
+						<div class="section__text mdl-cell mdl-cell--2-col"
+							style="display: inline">
 							<a href="#">Addison</a>
 						</div>
-						<div
-							class="section__text mdl-cell mdl-cell--9-col" style="display:inline">
-						LOVE</div>
+						<div class="section__text mdl-cell mdl-cell--9-col"
+							style="display: inline">LOVE</div>
 					</div>
 				</div>
 			</div>

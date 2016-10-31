@@ -1,5 +1,6 @@
 {% extends "templates/base_page.html" %} {% block content %}
-<form action="{{ form_action }}" method="POST" enctype="multipart/form-data">
+<form action="{{ form_action }}" method="POST"
+	enctype="multipart/form-data">
 	<div class="insert-item-buttons">
 		<button type="submit"
 			class="insert-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
@@ -9,60 +10,83 @@
 			Cancel</button>
 	</div>
 	<h4>Item</h4>
-	<div class="mdl-textfield mdl-js-textfield">
-
-
 		<div id="image-attachment">
-			{% set has_img = item_event and
-			item_event.media_blob_key %} {% if has_img %}
-			<div id="current-img">
-				<input type="hidden" name="original_blob_key"
-					value={{item_event.media_blob_key}}> <img
-					src="/img/{{item_event.media_blob_key}}" alt="image"
-					height="240" border="1"><br>
-				<br>
-			</div>
-			{% endif %} <input id="img-input" type="file" name="image_attachment"
+			{% set has_item = item %} 
+			{% set has_img = item and item.media_blob_key %} 
+			{% if has_img %}
+				<div id="current-img">
+					<input type="hidden" name="original_blob_key"
+						value={{item.media_blob_key}}> <img
+						src="/img/{{item.media_blob_key}}" alt="image" height="240"
+						border="1"><br>
+					<br>
+				</div>
+			{% endif %} 
+			<input id="img-input" type="file" name="image_attachment"
 				class="hidden">
 			<button id="attach-img-btn" type="button"
 				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-				{% if has_img %}Change{% else %}Attach{% endif %} image</button>
+				{% if has_img %}Change{% else %}Attach{% endif %}image</button>
 			{% if has_img %}
-			<button id="remove-img-btn" type="button"
-				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-				Remove image</button>
-			{% endif %}
+				<button id="remove-img-btn" type="button"
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+					Remove image</button>
+				{% endif %}
 		</div>
 
-	</div>
-
-	<h4>Details</h4>
-	<div>
-		<div class="mdl-textfield mdl-js-textfield">
-			<input class="mdl-textfield__input" type="text" name="item_name"
-				id="item_name"> <label class="mdl-textfield__label"
-				for="item_name">Name</label> <input name="item_entity_key"
-				type="text" class="hidden"></input>
+		<h4>Details</h4>
+		{% if has_item %}
+		<input name="item-entity-key" class="hidden" value={{item.key.urlsafe()}}></input>
+		<div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" type="text" name="item_name"
+					id="item_name" value="{{ item.name }}"> <label
+					class="mdl-textfield__label" for="item_name">Name</label>
+			</div>
 		</div>
-	</div>
-	<div>
-		<div class="mdl-textfield mdl-js-textfield">
-			<textarea class="mdl-textfield__input" type="text" rows="4"
-				name="item_description" id="item_description"></textarea>
-			<label class="mdl-textfield__label" for="item_description">Description</label>
+		<div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" value="{{ item.description }}"
+					name="item_description" id="item_description"></input> <label
+					class="mdl-textfield__label" for="item_description">Description</label>
+			</div>
 		</div>
-	</div>
-	<div>
-		<div class="mdl-textfield mdl-js-textfield">
-			<input class="mdl-textfield__input" type="text" name="item_price"
-				pattern="-?[0-9]*(\.[0-9]+)?" id="item_price"> <label
-				class="mdl-textfield__label" for="item_price">Price</label> <span
-				class="mdl-textfield__error">Input is not a number!</span>
+		<div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" type="text" value="{{ item.price }}"
+					name="item_price" pattern="-?[0-9]*(\.[0-9]+)?" id="item_price">
+				<label class="mdl-textfield__label" for="item_price">Price</label> <span
+					class="mdl-textfield__error">Input is not a number!</span>
+			</div>
 		</div>
-	</div>
-	<div id="snackbar-container" class="mdl-js-snackbar mdl-snackbar">
-		<div class="mdl-snackbar__text"></div>
-		<button class="mdl-snackbar__action" type="button"></button>
-	</div>
+		
+		{% else %}
+		<div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" type="text" name="item_name"
+					id="item_name"> <label
+					class="mdl-textfield__label" for="item_name">Name</label>
+			</div>
+		</div>
+		<div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input"
+					name="item_description" id="item_description"></input> <label
+					class="mdl-textfield__label" for="item_description">Description</label>
+			</div>
+		</div>
+		<div>
+			<div class="mdl-textfield mdl-js-textfield">
+				<input class="mdl-textfield__input" type="text"
+					name="item_price" pattern="-?[0-9]*(\.[0-9]+)?" id="item_price">
+				<label class="mdl-textfield__label" for="item_price">Price</label> <span
+					class="mdl-textfield__error">Input is not a number!</span>
+			</div>
+		</div>
+		{% endif %}
+		<div id="snackbar-container" class="mdl-js-snackbar mdl-snackbar">
+			<div class="mdl-snackbar__text"></div>
+			<button class="mdl-snackbar__action" type="button"></button>
+		</div>
 </form>
 {% endblock %}
