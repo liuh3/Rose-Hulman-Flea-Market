@@ -3,7 +3,6 @@ from google.appengine.ext import ndb
 class User(ndb.Model):
   name = ndb.StringProperty()
   rose_username = ndb.StringProperty()
-  media_blob_key = ndb.BlobKeyProperty()
   phone_number = ndb.StringProperty()
   liked_item = ndb.KeyProperty(repeated=True)
 

@@ -13,8 +13,9 @@
 			</header>
 			<div
 				class="item-detail mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-				{% if is_seller %}
-				<div class="mdl-card__menu">
+				
+				<div class="detail-buttons mdl-card__menu">
+					{% if is_seller %}
 					<form action="/insert-item" method="GET">
 						<input name="item-entity-key" class="hidden"
 							value={{item.key.urlsafe()}} />
@@ -23,16 +24,31 @@
 							<i class="material-icons">edit</i>
 						</button>
 					</form>
-
-
+					
 					<button data-toggle="modal" data-target="#delete-item-modal"
 						type="button"
 						class="delete-item mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
 						<div class="hidden entity-key">{{ item.key.urlsafe() }}</div>
 						<i class="material-icons">delete</i>
 					</button>
+					{% endif %}
+					{% if user_info is defined %}
+					<form action="/add-liked-item" method="POST">
+						<input name="item-entity-key" class="hidden"
+							value={{item.key.urlsafe()}} />
+						<button
+							type="submit"
+							class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+							{% if already_liked %}
+								<i class="material-icons">favorite</i>
+							{% else %}
+								<i class="material-icons">favorite_border</i>
+							{% endif %}
+						</button>
+					</form>
+					{% endif %}
 				</div>
-				{% endif %}
+				
 
 				<dialog class="mdl-dialog" id="delete-item-modal">
 				<h4 class="mdl-dialog__title">Delete Item</h4>

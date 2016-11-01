@@ -34,7 +34,9 @@ app = webapp2.WSGIApplication([
     ('/view-item', item_handlers.DetailItemHandler),
     ('/insert-user', insert_handlers.InsertUserHandler),
     ('/insert-item', insert_handlers.InsertItemHandler),
+    ('/add-liked-item', item_handlers.AddLikedItemHandler),
     ('/delete-item', insert_handlers.DeleteItemHandler),
     ('/posted-items', listing_handlers.PostedHandler),
+    ('/liked-items', listing_handlers.LikedHandler),
     ('/profile', profile_handlers.ProfileHandler)
 ], config=config, debug=True)
