@@ -16,6 +16,32 @@
 				user_info.username }}</div>
 			<div class="mdl-cell mdl-cell--12-col mdl-typography--headline">
 				{{ user_info.email }}</div>
+			{% if user_model.phone_number %}
+				<div class="mdl-cell mdl-cell--12-col mdl-typography--headline">Phone:
+				{{ user_model.phone_number }}</div>
+			{% else %}
+				<button class="add-phone-number mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+				<div class="hidden entity-key">{{ user_model.key.urlsafe() }}</div>
+				Add Phone Number</button>
+			{% endif %}
+			
+		
+			<dialog class="mdl-dialog" id="add-phone-number-modal">
+			<form action="/insert-user" method="POST" role="form">
+			<h4 class="mdl-dialog__title">Add Phone Number</h4>
+			<div class="mdl-dialog__content">
+				<p>Please add you phone number</p>
+				<input class="mdl-textfield__input" type="text" name="phone-number"
+					id="phone-number">
+			</div>
+				<input name="user-entity-key" class="hidden">
+				<div class="mdl-dialog__actions">
+					<button type="submit" class="mdl-button">Yes</button>
+					<button type="button" class="mdl-button close-dialog">No</button>
+				</div>
+			</form>
+			</dialog>
+			
 		</div>
 
 		{% endif %}

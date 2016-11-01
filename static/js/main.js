@@ -19,10 +19,14 @@ rh.fm.loginRose = function() {
 
 rh.fm.enableButtons = function() {
 	var dialog = document.querySelector('dialog');
+	$(".add-phone-number").click(function() {
+		dialog.showModal();
+		entityKey = $(this).find(".entity-key").html();
+		$("#add-phone-number-modal input[name=user-entity-key]").val(entityKey);
+	});
 	$(".delete-item").click(function() {
 		dialog.showModal();
 		entityKey= $(this).find(".entity-key").html();
-		console.log(entityKey);
 		$("#delete-item-modal input[name=item-entity-key]").val(entityKey);
 	});
 	$(".close-dialog").click(function(){
