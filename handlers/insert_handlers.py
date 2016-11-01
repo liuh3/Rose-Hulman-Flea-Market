@@ -13,12 +13,22 @@ import utils
 
 PARENT_KEY = ndb.Key("Entity", "item_root")
 
+class InsertUserHandler(base_handlers.BaseHandler):
+  def post(self):
+    edit_user_key = ndb.Key(urlsafe=self.request.get('user-entity-key'))
+    user = edit_user_key.get()
+    user.phone_number = self.request.get('phone-number')
+    logging.info(self.request.get('phone-number'))
+    logging.info(user)
+    user.put()
+    self.redirect(self.request.referer)
+
 class DeleteItemHandler(base_handlers.BaseHandler):
     def post(self):
       delete_item = ndb.Key(urlsafe=self.request.get('item-entity-key'))
       delete_item.delete()
       self.redirect('/')
-  
+
 class InsertItemHandler(base_handlers.BaseHandler, blobstore_handlers.BlobstoreUploadHandler):
     def get(self):
         template = main.jinja_env.get_template("templates/insert_item.html")

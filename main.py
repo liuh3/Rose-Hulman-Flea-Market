@@ -32,7 +32,7 @@ app = webapp2.WSGIApplication([
     ('/login', main_page_handlers.LoginHandler),
     ('/logout', main_page_handlers.LogoutHandler),
     ('/view-item', item_handlers.DetailItemHandler),
-#     ('/listing', main_page_handlers.MainHandler),
+    ('/insert-user', insert_handlers.InsertUserHandler),
     ('/insert-item', insert_handlers.InsertItemHandler),
     ('/delete-item', insert_handlers.DeleteItemHandler),
     ('/posted-items', listing_handlers.PostedHandler),

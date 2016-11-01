@@ -1,16 +1,17 @@
 import json
 import logging
 
-from webapp2_extras import sessions
+from google.appengine.ext import ndb
 
 from handlers import base_handlers
 import main
+from models import User
 from rosefire import RosefireTokenVerifier
 import utils
 
 
 ROSEFIRE_SECRET ="J0rh5xi1IPlzHJiHJCX3"
-
+USER_PARENT_KEY = ndb.Key("Entity", "user_root")
 class MainHandler(base_handlers.BaseHandler):
     def get(self):
         # A basic template could just send text out the response stream, but we use Jinja
@@ -34,6 +35,12 @@ class LoginHandler(base_handlers.BaseHandler):
                          "email": auth_data.email,
                          "role": auth_data.group}
             self.session["user_info"] = json.dumps(user_info)
+          
+            if utils.contain_user(user_info['username']): 
+              user = User(parent = USER_PARENT_KEY,
+                          name=auth_data.name,
+                          rose_username=auth_data.username);
+              user.put()
         self.redirect(uri="/")
 
 class LogoutHandler(base_handlers.BaseHandler):
