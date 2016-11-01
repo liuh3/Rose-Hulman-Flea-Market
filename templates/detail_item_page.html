@@ -37,7 +37,7 @@
 							value={{item.key.urlsafe()}} />
 						<button type="submit"
 							class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-							{% if already_liked %} <i class="material-icons">favorite</i> {%
+							{% if already_liked %} <a><i class="material-icons">favorite</i></a> {%
 							else %} <i class="material-icons">favorite_border</i> {% endif %}
 						</button>
 					</form>
@@ -75,36 +75,38 @@
 		<section
 			class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp comment-section">
 			<div class="mdl-card mdl-cell mdl-cell--12-col">
-				<div class="mdl-card__supporting-text mdl-grid mdl-grid">
+				<ul class="mdl-card__supporting-text mdl-grid mdl-grid">
 					<h4 class="mdl-cell mdl-cell--12-col">Comments</h4>
-					<div class="section__text mdl-cell mdl-cell--12-col">
-						{% for comment in comments %}
+					{% for comment in comments %}
+					<li class="section__text mdl-cell mdl-cell--12-col">
 						<div class="section__text mdl-cell mdl-cell--2-col"
 							style="display: inline">
 							<a href="#">{{ comment.author_username }}</a>
 						</div>
 						<div class="section__text mdl-cell mdl-cell--9-col"
 							style="display: inline">{{ comment.content }}</div>
-						<div class="pull-right">{{
+						<div class="comment-date">{{
 							comment.last_touch_date_time|date_time_display_format(comment.last_touch_date_time)
 							}}</div>
+					</li> {% endfor %}
 
-						{% endfor %}
-
-					</div>
+				<div class="mdl-cell mdl-cell--12-col">
 					<form action="/comment" method="post">
-						<div>
-							<textarea name="content" class="input-block-level" rows="3"></textarea>
+						<div class="mdl-textfield mdl-js-textfield">
+							<textarea name="content" rows="3"
+								class="mdl-textfield__input comment-text-area"></textarea>
 						</div>
 						<div class="comment-area">
 							<input name="item-entity-key" class="hidden"
 								value={{item.key.urlsafe()}} />
 							<button type="submit"
-								class="btn btn-large btn-primary comment-button">Comment
+								class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Comment
 							</button>
 						</div>
 					</form>
 				</div>
+								</ul>
+				
 			</div>
 		</section>
 	</div>

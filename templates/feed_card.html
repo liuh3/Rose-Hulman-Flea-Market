@@ -9,12 +9,11 @@
 		<span class="item-name">{{ item.name }}</span><br> ${{ item.price
 		}}
 	</div>
-	<hr>
 	<div class="mdl-card__titlemdl-card--expand item-card">
 		<input name="item-entity-key" class="hidden"
 			value={{item.key.urlsafe()}} />
 		<button type="submit"
-			class="view-item-button mdl-button mdl-js-button">View
+			class="view-item-button mdl-button mdl-js-button mdl-button--raised mdl-button--accent">View
 			Details</button>
 	</div>
 </form>
