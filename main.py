@@ -4,6 +4,7 @@ import os
 import jinja2
 import webapp2
 
+import date_utils
 from handlers import insert_handlers, main_page_handlers, \
   profile_handlers, blob_handlers, listing_handlers, item_handlers
 
@@ -13,6 +14,8 @@ def __init_jinja_env():
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
         extensions=["jinja2.ext.do", "jinja2.ext.loopcontrols", "jinja2.ext.with_"],
         autoescape=True)
+    jenv.filters["date_time_display_format"] = date_utils.date_time_display_format
+
     # Example of a Jinja filter (useful for formatting data sometimes)
     #   jenv.filters["time_and_date_format"] = date_utils.time_and_date_format
     return jenv
@@ -38,5 +41,6 @@ app = webapp2.WSGIApplication([
     ('/delete-item', insert_handlers.DeleteItemHandler),
     ('/posted-items', listing_handlers.PostedHandler),
     ('/liked-items', listing_handlers.LikedHandler),
+    ('/comment', item_handlers.CommentHandler),
     ('/profile', profile_handlers.ProfileHandler)
 ], config=config, debug=True)

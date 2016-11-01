@@ -8,7 +8,7 @@ from google.appengine.ext.webapp import blobstore_handlers
 from handlers import base_handlers
 import main
 from models import Item
-import utils
+import ndb_utils
 
 
 PARENT_KEY = ndb.Key("Entity", "item_root")
@@ -55,7 +55,7 @@ class InsertItemHandler(base_handlers.BaseHandler, blobstore_handlers.BlobstoreU
         else:
           #Add
           item = Item(parent=PARENT_KEY);
-          item.seller_key = utils.get_parent_key(user);
+          item.seller_key = ndb_utils.get_parent_key(user);
           
         if self.get_uploads() and len(self.get_uploads()) == 1:
           logging.info("Received an image blob with this text message event.")

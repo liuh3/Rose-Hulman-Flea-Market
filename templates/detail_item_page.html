@@ -13,7 +13,7 @@
 			</header>
 			<div
 				class="item-detail mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-				
+
 				<div class="detail-buttons mdl-card__menu">
 					{% if is_seller %}
 					<form action="/insert-item" method="GET">
@@ -24,31 +24,26 @@
 							<i class="material-icons">edit</i>
 						</button>
 					</form>
-					
+
 					<button data-toggle="modal" data-target="#delete-item-modal"
 						type="button"
 						class="delete-item mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
 						<div class="hidden entity-key">{{ item.key.urlsafe() }}</div>
 						<i class="material-icons">delete</i>
 					</button>
-					{% endif %}
-					{% if user_info is defined %}
+					{% endif %} {% if user_info is defined %}
 					<form action="/add-liked-item" method="POST">
 						<input name="item-entity-key" class="hidden"
 							value={{item.key.urlsafe()}} />
-						<button
-							type="submit"
+						<button type="submit"
 							class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-							{% if already_liked %}
-								<i class="material-icons">favorite</i>
-							{% else %}
-								<i class="material-icons">favorite_border</i>
-							{% endif %}
+							{% if already_liked %} <a><i class="material-icons">favorite</i></a> {%
+							else %} <i class="material-icons">favorite_border</i> {% endif %}
 						</button>
 					</form>
 					{% endif %}
 				</div>
-				
+
 
 				<dialog class="mdl-dialog" id="delete-item-modal">
 				<h4 class="mdl-dialog__title">Delete Item</h4>
@@ -80,27 +75,38 @@
 		<section
 			class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp comment-section">
 			<div class="mdl-card mdl-cell mdl-cell--12-col">
-				<div class="mdl-card__supporting-text mdl-grid mdl-grid">
+				<ul class="mdl-card__supporting-text mdl-grid mdl-grid">
 					<h4 class="mdl-cell mdl-cell--12-col">Comments</h4>
-					<div class="section__text mdl-cell mdl-cell--12-col">
+					{% for comment in comments %}
+					<li class="section__text mdl-cell mdl-cell--12-col">
 						<div class="section__text mdl-cell mdl-cell--2-col"
 							style="display: inline">
-							<a href="#">Coco</a>
+							<a href="#">{{ comment.author_username }}</a>
 						</div>
 						<div class="section__text mdl-cell mdl-cell--9-col"
-							style="display: inline">Nice Item</div>
-					</div>
+							style="display: inline">{{ comment.content }}</div>
+						<div class="comment-date">{{
+							comment.last_touch_date_time|date_time_display_format(comment.last_touch_date_time)
+							}}</div>
+					</li> {% endfor %}
 
-
-					<div class="section__text mdl-cell mdl-cell--12-col">
-						<div class="section__text mdl-cell mdl-cell--2-col"
-							style="display: inline">
-							<a href="#">Addison</a>
+				<div class="mdl-cell mdl-cell--12-col">
+					<form action="/comment" method="post">
+						<div class="mdl-textfield mdl-js-textfield">
+							<textarea name="content" rows="3"
+								class="mdl-textfield__input comment-text-area"></textarea>
 						</div>
-						<div class="section__text mdl-cell mdl-cell--9-col"
-							style="display: inline">LOVE</div>
-					</div>
+						<div class="comment-area">
+							<input name="item-entity-key" class="hidden"
+								value={{item.key.urlsafe()}} />
+							<button type="submit"
+								class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Comment
+							</button>
+						</div>
+					</form>
 				</div>
+								</ul>
+				
 			</div>
 		</section>
 	</div>

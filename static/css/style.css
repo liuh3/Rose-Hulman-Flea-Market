@@ -64,3 +64,17 @@ img {
 .detail-buttons {
 	display: inherit;
 }
+
+.comment-date{
+	float:right;
+}
+
+.comment-text-area{
+	width:100%;
+	border: 1px solid pink;
+}
+
+ul {
+	list-style:none;
+}
+
