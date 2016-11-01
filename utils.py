@@ -2,7 +2,7 @@ import logging
 
 from google.appengine.ext import ndb
 
-from models import Item, User
+from models import Item, User, Comment
 
 
 PARENT_KEY = ndb.Key("Entity", "item_root")
@@ -32,3 +32,6 @@ def get_item_with_key(key_url_string):
   item_key = ndb.Key(urlsafe=key_url_string)
   return item_key.get()
 
+def get_comment_with_item_key(item_key):
+    comments = Comment.query(ancestor=item_key)
+    return comments

@@ -82,7 +82,29 @@
 			<div class="mdl-card mdl-cell mdl-cell--12-col">
 				<div class="mdl-card__supporting-text mdl-grid mdl-grid">
 					<h4 class="mdl-cell mdl-cell--12-col">Comments</h4>
-					<div class="section__text mdl-cell mdl-cell--12-col">
+					 <div class="container">
+      <!-- [START greetings] -->
+      {% for comment in comments %}
+      <div class="row">
+        <blockquote>{{ comment.content }}</blockquote>
+      </div>
+      {% endfor %}
+
+      <form action="/comment" method="post">
+        <div><textarea name="content" class="input-block-level" rows="3"></textarea></div>
+        <div class="comment-area">
+        	<input name="item-entity-key" class="hidden" value={{item.key.urlsafe()}}/>
+        	<button type="submit" class="btn btn-large btn-primary comment-button">Comment
+        	</button>
+        </div>
+      </form>
+    </div>
+					
+					
+					
+					
+					
+					<!-- <div class="section__text mdl-cell mdl-cell--12-col">
 						<div class="section__text mdl-cell mdl-cell--2-col"
 							style="display: inline">
 							<a href="#">Coco</a>
@@ -99,7 +121,7 @@
 						</div>
 						<div class="section__text mdl-cell mdl-cell--9-col"
 							style="display: inline">LOVE</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</section>

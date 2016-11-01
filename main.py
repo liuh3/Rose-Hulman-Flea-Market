@@ -38,5 +38,6 @@ app = webapp2.WSGIApplication([
     ('/delete-item', insert_handlers.DeleteItemHandler),
     ('/posted-items', listing_handlers.PostedHandler),
     ('/liked-items', listing_handlers.LikedHandler),
+    ('/comment', item_handlers.CommentHandler),
     ('/profile', profile_handlers.ProfileHandler)
 ], config=config, debug=True)
