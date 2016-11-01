@@ -60,3 +60,7 @@ img {
    text-decoration: none;
    color: white;
 }
+
+.detail-buttons {
+	display: inherit;
+}

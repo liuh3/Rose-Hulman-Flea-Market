@@ -1,12 +1,12 @@
 import json
 import logging
 
+from google.appengine.api import blobstore
 from google.appengine.ext import ndb
 from google.appengine.ext.webapp import blobstore_handlers
 
 from handlers import base_handlers
 import main
-from google.appengine.api import blobstore
 from models import Item
 import utils
 
@@ -19,7 +19,6 @@ class InsertUserHandler(base_handlers.BaseHandler):
     user = edit_user_key.get()
     user.phone_number = self.request.get('phone-number')
     logging.info(self.request.get('phone-number'))
-    logging.info(user)
     user.put()
     self.redirect(self.request.referer)
 
@@ -33,7 +32,6 @@ class InsertItemHandler(base_handlers.BaseHandler, blobstore_handlers.BlobstoreU
     def get(self):
         template = main.jinja_env.get_template("templates/insert_item.html")
         urlsafe_entity_key = self.request.get('item-entity-key')
-        logging.info(urlsafe_entity_key)
         if "user_info" in self.session:
             user_info = json.loads(self.session["user_info"])
             if len(urlsafe_entity_key) > 0:

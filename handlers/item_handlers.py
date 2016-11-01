@@ -1,6 +1,7 @@
 import json
 import logging
 
+from google.appengine.ext import ndb
 import webapp2
 
 from handlers import base_handlers
@@ -9,14 +10,31 @@ import utils
 
 
 class DetailItemHandler(base_handlers.BaseHandler):
-    def post(self):
-      if self.request.get('item-entity-key'):
-        template = main.jinja_env.get_template("templates/detail_item_page.html")
-        entityKey = self.request.get('item-entity-key')
-        itemToDisplay = utils.get_item_with_key(entityKey)
-        if "user_info" in self.session:
-          user_info = json.loads(self.session["user_info"]) 
-          is_seller = utils.get_parent_key(user_info) == itemToDisplay.seller_key
-          self.response.out.write(template.render({'user_info': user_info, "item" : itemToDisplay, "is_seller": is_seller}))
-        else:
-          self.response.out.write(template.render({"item" : itemToDisplay}))
+    def get(self):
+      item_key = ndb.Key(urlsafe=self.request.get('item-entity-key'))
+      template = main.jinja_env.get_template("templates/detail_item_page.html")
+      itemToDisplay = item_key.get()
+      logging.info(itemToDisplay)
+      if "user_info" in self.session:
+        user_info = json.loads(self.session["user_info"]) 
+        is_seller = utils.get_parent_key(user_info) == itemToDisplay.seller_key
+        user = utils.get_user_with_username(user_info['username'])
+        already_liked = item_key in user.liked_item
+        logging.info(already_liked)
+        self.response.out.write(template.render({'user_info': user_info, "item" : itemToDisplay, "is_seller": is_seller, "already_liked": already_liked}))
+      else:
+        self.response.out.write(template.render({"item": itemToDisplay}))
+    
+
+class AddLikedItemHandler(base_handlers.BaseHandler):
+  def post(self):
+    item_key = ndb.Key(urlsafe=self.request.get('item-entity-key'))
+    if "user_info" in self.session:
+      user_info = json.loads(self.session["user_info"])
+      user = utils.get_user_with_username(user_info['username'])
+      if item_key not in user.liked_item:
+        user.liked_item.append(item_key)
+      else:
+        user.liked_item.remove(item_key)
+      user.put()
+      self.redirect(self.request.referer)
