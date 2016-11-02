@@ -7,7 +7,6 @@ import webapp2
 from handlers import insert_handlers, main_page_handlers, \
   profile_handlers, blob_handlers, listing_handlers, item_handlers
 
-
 def __init_jinja_env():
     jenv = jinja2.Environment(
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),

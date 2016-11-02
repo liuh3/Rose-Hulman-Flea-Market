@@ -1,8 +1,6 @@
 import json
 import logging
-
 from google.appengine.ext import ndb
-import webapp2
 
 from handlers import base_handlers
 import main

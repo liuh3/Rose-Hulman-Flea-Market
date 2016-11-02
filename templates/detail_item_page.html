@@ -70,8 +70,9 @@
 					<p>{{ item.description }}</p>
 					<p>${{ item.price }}</p>
 				</div>
+				{{user_info.email}}
 				<div class="mdl-card__actions">
-					<a href="#"
+					<a href="mailto:{{user_info.email}}?subject=Buying%20Item%20{{item.name}}"
 						class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Contact
 						seller</a>
 				</div>
