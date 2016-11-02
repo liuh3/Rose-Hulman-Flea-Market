@@ -16,8 +16,9 @@ class Item(ndb.Model):
   last_touch_date_time = ndb.DateTimeProperty(auto_now=True)
   
 class Comment(ndb.Model):
-  message = ndb.StringProperty()
-  author_key = ndb.KeyProperty();
+  content = ndb.StringProperty()
+  author_key = ndb.KeyProperty()
+  author_username = ndb.StringProperty()
   last_touch_date_time = ndb.DateTimeProperty(auto_now=True)
   
     

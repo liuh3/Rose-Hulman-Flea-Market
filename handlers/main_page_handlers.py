@@ -6,8 +6,8 @@ from google.appengine.ext import ndb
 from handlers import base_handlers
 import main
 from models import User
+import ndb_utils
 from rosefire import RosefireTokenVerifier
-import utils
 
 
 ROSEFIRE_SECRET ="J0rh5xi1IPlzHJiHJCX3"
@@ -16,7 +16,7 @@ class MainHandler(base_handlers.BaseHandler):
     def get(self):
         # A basic template could just send text out the response stream, but we use Jinja
         # self.response.write("Hello world!")
-        items = utils.get_items()
+        items = ndb_utils.get_items()
         template = main.jinja_env.get_template("templates/feed_list.html")
 
         if "user_info" in self.session:
@@ -36,7 +36,7 @@ class LoginHandler(base_handlers.BaseHandler):
                          "role": auth_data.group}
             self.session["user_info"] = json.dumps(user_info)
           
-            if utils.contain_user(user_info['username']): 
+            if ndb_utils.contain_user(user_info['username']): 
               user = User(parent = USER_PARENT_KEY,
                           name=auth_data.name,
                           rose_username=auth_data.username);
