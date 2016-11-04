@@ -4,6 +4,7 @@ class User(ndb.Model):
   name = ndb.StringProperty()
   rose_username = ndb.StringProperty()
   phone_number = ndb.StringProperty()
+  email = ndb.StringProperty()
   liked_item = ndb.KeyProperty(repeated=True)
 
 class Item(ndb.Model):

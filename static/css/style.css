@@ -23,7 +23,6 @@ img {
 .feed-card {
 	margin:15px;
 	width: 30%;
-	height: 400px;
 	text-align: center;
 }
 
@@ -41,11 +40,11 @@ img {
 	width: 100%;
 }
 .item-name {
-	font-size:20px;
-	
+	font-size:1.5em;
 }
 .item-card-image {
 	height: 100%;
+	width: 100%;
 }
 .item-detail-image {
 	height: 100%;

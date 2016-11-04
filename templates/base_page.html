@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
-	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+	content="width=device-width, initial-scale=1.0, maximum-scale=0.5">
 <title>Rose-Hulman Flea Market</title>
 <!-- Material Design Lite -->
 <link rel="stylesheet"
@@ -29,8 +29,8 @@
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
-				<span class="mdl-layout-title"><a href="/" class="not-active">Rose-Hulman Flea Market </a></span> {% if
-				user_info is defined %}
+				<span class="mdl-layout-title"><a href="/" class="not-active">Rose-Hulman Flea Market </a></span> 
+				{% if user_info is defined %}
 				<nav class="mdl-navigation">
 					<a class="mdl-navigation__link" id="liked_list" href='/liked-items'> Liked </a>
 				</nav>

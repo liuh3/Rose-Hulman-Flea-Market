@@ -15,20 +15,22 @@ class DetailItemHandler(base_handlers.BaseHandler):
     template = main.jinja_env.get_template("templates/detail_item_page.html")
     itemToDisplay = item_key.get()
     comments = ndb_utils.get_comment_with_item_key(item_key)
-
+    seller_email = itemToDisplay.seller_key.id()
+    seller = ndb_utils.get_user_with_email(seller_email)
     if "user_info" in self.session:
       user_info = json.loads(self.session["user_info"]) 
       is_seller = ndb_utils.get_parent_key(user_info) == itemToDisplay.seller_key
+      
       user = ndb_utils.get_user_with_username(user_info['username'])
       already_liked = item_key in user.liked_item
-      logging.info(already_liked)
-      self.response.out.write(template.render({'user_info': user_info,
+      self.response.out.write(template.render({"user_info": user_info,
                                              "item" : itemToDisplay,
                                              "is_seller": is_seller,
+                                             "seller": seller,
                                              "already_liked": already_liked,
                                              "comments": comments}))
     else:
-      self.response.out.write(template.render({"item": itemToDisplay}))
+      self.response.out.write(template.render({"item": itemToDisplay, "seller": seller, "comments": comments}))
 
 class CommentHandler(base_handlers.BaseHandler):
     def post(self):

@@ -39,11 +39,12 @@ class LoginHandler(base_handlers.BaseHandler):
             if ndb_utils.contain_user(user_info['username']): 
               user = User(parent = USER_PARENT_KEY,
                           name=auth_data.name,
+                          email=auth_data.email,
                           rose_username=auth_data.username);
               user.put()
-        self.redirect(uri="/")
+        self.redirect(self.request.referer)
 
 class LogoutHandler(base_handlers.BaseHandler):
     def get(self):
         del self.session["user_info"]
-        self.redirect(uri="/")
+        self.redirect(self.request.referer)

@@ -25,13 +25,19 @@ rh.fm.enableButtons = function() {
 		$("#add-phone-number-modal input[name=user-entity-key]").val(entityKey);
 	});
 	$(".delete-item").click(function() {
+		$("dialog").removeClass("hidden");
 		dialog.showModal();
 		entityKey= $(this).find(".entity-key").html();
 		$("#delete-item-modal input[name=item-entity-key]").val(entityKey);
 	});
 	$(".close-dialog").click(function(){
+		$("dialog").addClass("hidden");
 		dialog.close();
-	})
+	});
+	$(".delete-item-confirm").click(function(){
+		$("dialog").addClass("hidden");
+	});
+	
 	
 	$("#attach-img-btn").click(function() {
 		rh.fm.triggerFileInput();

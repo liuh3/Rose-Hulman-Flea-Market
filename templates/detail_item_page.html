@@ -37,26 +37,27 @@
 							value={{item.key.urlsafe()}} />
 						<button type="submit"
 							class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-							{% if already_liked %} <a><i class="material-icons">favorite</i></a> {%
-							else %} <i class="material-icons">favorite_border</i> {% endif %}
+							{% if already_liked %} <a><i class="material-icons">favorite</i></a>
+							{% else %} <i class="material-icons">favorite_border</i> {% endif
+							%}
 						</button>
 					</form>
 					{% endif %}
 				</div>
 
 
-				<dialog class="mdl-dialog" id="delete-item-modal">
-				<h4 class="mdl-dialog__title">Delete Item</h4>
-				<div class="mdl-dialog__content">
-					<p>Are you sure you want to delete this item?</p>
-				</div>
-				<form action="/delete-item" method="POST" role="form">
-					<input name="item-entity-key" class="hidden">
-					<div class="mdl-dialog__actions">
-						<button type="submit" class="mdl-button">Yes</button>
-						<button type="button" class="mdl-button close-dialog">No</button>
+				<dialog class="mdl-dialog hidden" id="delete-item-modal">
+					<h4 class="mdl-dialog__title">Delete Item</h4>
+					<div class="mdl-dialog__content">
+						<p>Are you sure you want to delete this item?</p>
 					</div>
-				</form>
+					<form action="/delete-item" method="POST" role="form">
+						<input name="item-entity-key" class="hidden">
+						<div class="mdl-dialog__actions">
+							<button type="submit" class="mdl-button delete-item-confirm">Yes</button>
+							<button type="button" class="mdl-button close-dialog">No</button>
+						</div>
+					</form>
 				</dialog>
 
 				<div class="mdl-card__supporting-text">
@@ -65,11 +66,19 @@
 					<p>{{ item.description }}</p>
 					<p>${{ item.price }}</p>
 				</div>
+
+				{% if user_info is defined %}
 				<div class="mdl-card__actions">
-					<a href="mailto:{{user_info.email}}?subject=Buying%20Item%20{{item.name}}"
-						class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Contact
-						seller</a>
+					<a href="mailto:{{seller.email}}?subject=Buying%20Item%20{{item.name}}"
+					   class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+						Contact seller</a>
 				</div>
+				{% if seller.phone_number %}
+				<div class="mdl-card__supporting-text">
+					<p>Cell: {{seller.phone_number}}</p>
+				</div>
+				{% endif %}
+				{% endif %}
 			</div>
 		</section>
 		<section
@@ -90,23 +99,26 @@
 							}}</div>
 					</li> {% endfor %}
 
-				<div class="mdl-cell mdl-cell--12-col">
-					<form action="/comment" method="post">
-						<div class="mdl-textfield mdl-js-textfield">
-							<textarea name="content" rows="3"
-								class="mdl-textfield__input comment-text-area"></textarea>
-						</div>
-						<div class="comment-area">
-							<input name="item-entity-key" class="hidden"
-								value={{item.key.urlsafe()}} />
-							<button type="submit"
-								class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Comment
-							</button>
-						</div>
-					</form>
-				</div>
-								</ul>
-				
+
+					{% if user_info is defined %}
+					<div class="mdl-cell mdl-cell--12-col">
+						<form action="/comment" method="post">
+							<div class="mdl-textfield mdl-js-textfield">
+								<textarea name="content" rows="3"
+									class="mdl-textfield__input comment-text-area"></textarea>
+							</div>
+							<div class="comment-area">
+								<input name="item-entity-key" class="hidden"
+									value={{item.key.urlsafe()}} />
+								<button type="submit"
+									class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">Comment
+								</button>
+							</div>
+						</form>
+					</div>
+					{% endif %}
+				</ul>
+
 			</div>
 		</section>
 	</div>
